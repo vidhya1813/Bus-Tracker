@@ -135,7 +135,11 @@ function buildStops(raw, avgKmh = AVG_KMH) {
 
 // Demo-mode only (in-memory DB): let the sample staff accounts use password login too.
 // Never applied to a real database by `npm run db:setup`.
-export const DEMO_PASSWORDS = { 'admin@govbus.test': 'Admin@2026', 'driver@govbus.test': 'Driver@2026' };
+export const DEMO_PASSWORDS = {
+  'admin@govbus.test': 'Admin@2026',
+  'driver@govbus.test': 'Driver@2026',
+  'passenger@govbus.test': 'Passenger@2026',
+};
 
 export async function seed({ query, tx, demo = false }) {
   const [{ n }] = await query('SELECT count(*)::int AS n FROM routes');
@@ -189,6 +193,9 @@ export async function seed({ query, tx, demo = false }) {
       `INSERT INTO users (name, email, phone, role) VALUES ('Murugan (Driver)', 'driver@govbus.test', '+919000000001', 'driver')`,
     );
     if (demo) {
+      await t.query(
+        `INSERT INTO users (name, email, phone, role) VALUES ('Kavya (Passenger)', 'passenger@govbus.test', '+919000000002', 'passenger')`,
+      );
       for (const [email, pw] of Object.entries(DEMO_PASSWORDS)) {
         await t.query('UPDATE users SET password_hash = $2 WHERE email = $1', [email, await hashPassword(pw)]);
       }

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../api.js';
 import { usePrefs, THEMES } from '../prefs.jsx';
+import { useAuth } from '../auth.jsx';
 import Scenery from '../components/Scenery.jsx';
 import Tilt from '../components/Tilt.jsx';
 import { useSos } from '../components/SOS.jsx';
@@ -431,11 +432,13 @@ function Connections({ result }) {
 
 function HomeExtras({ places, routesCount, recent, lang, onTrip }) {
   const { t, setTheme } = usePrefs();
+  const { serverConfig } = useAuth();
   const navigate = useNavigate();
   const openSos = useSos();
   const [panel, setPanel] = useState(null); // 'pnr' | 'types' | 'conc'
 
   const quick = [
+    ...(serverConfig.demoMode ? [['credentials', '🔑', () => navigate('/credentials')]] : []),
     ['pnr', '🎫', () => setPanel(panel === 'pnr' ? null : 'pnr')],
     ['departures', '🚏', () => navigate('/departures')],
     ['track', '📍', () => navigate('/bookings')],

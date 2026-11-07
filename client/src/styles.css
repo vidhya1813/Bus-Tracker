@@ -548,6 +548,45 @@ legend { font-weight: 700; padding: 0 6px; }
 .google-slot { display: flex; justify-content: center; min-height: 44px; }
 .google-demo { display: flex; flex-direction: column; gap: 8px; }
 .switch-portal { text-align: center; margin-top: 16px; }
+/* ---------- Login credentials page ---------- */
+.cred-banner {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin: 0 0 14px; border-radius: 16px; text-decoration: none; color: var(--ink);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 22%, #fff), var(--primary-soft)); border: 2px dashed var(--accent);
+  transition: transform 0.15s;
+}
+.cred-banner:hover { transform: translateY(-2px); }
+.cred-banner > span:first-child { font-size: 1.6rem; }
+.cred-banner > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+.cred-banner small { color: var(--muted); }
+.cred-banner > span:last-child { font-weight: 900; color: var(--primary); font-size: 1.3rem; }
+.cred-hero {
+  display: flex; align-items: center; gap: 16px; padding: 22px; border-radius: 24px; margin-bottom: 18px; color: #fff;
+  background: linear-gradient(120deg, var(--primary-dark), var(--primary) 60%, color-mix(in srgb, var(--accent) 70%, var(--primary)));
+  box-shadow: var(--shadow-lg);
+}
+.cred-hero h1 { margin: 0; }
+.cred-hero p { margin: 4px 0 0; opacity: 0.92; }
+.cred-hero-icon { font-size: 3rem; animation: float 4s ease-in-out infinite; }
+.cred-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.cred-card { border-top: 6px solid var(--role); display: flex; flex-direction: column; gap: 10px; margin-bottom: 0; }
+.cred-head { display: flex; align-items: center; gap: 12px; }
+.cred-head h2 { margin: 0; }
+.cred-head > div { flex: 1; }
+.cred-icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font-size: 1.8rem; background: color-mix(in srgb, var(--role) 14%, #fff); transform: translateZ(30px); }
+.cred-portal { font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; color: var(--role); background: color-mix(in srgb, var(--role) 12%, #fff); white-space: nowrap; }
+.cred-field { display: grid; grid-template-columns: 1fr auto auto; grid-template-areas: 'label label label' 'value b1 b2'; align-items: center; column-gap: 6px; padding: 6px 6px 6px 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+.cred-field:not(:has(.cred-btn + .cred-btn)) { grid-template-columns: 1fr auto; grid-template-areas: 'label label' 'value b1'; }
+.cred-label { grid-area: label; font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.cred-value { grid-area: value; min-width: 0; font-size: 1rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); background: none; }
+.cred-btn { width: 40px; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 1rem; }
+.cred-btn:hover { background: var(--primary-soft); }
+.cred-can { margin: 4px 0; padding-left: 1.2rem; color: var(--ink); font-size: 0.92rem; }
+.cred-can li { margin: 3px 0; }
+.cred-go { margin-top: auto; background: linear-gradient(135deg, var(--role), color-mix(in srgb, var(--role) 65%, #000)); box-shadow: 0 4px 0 color-mix(in srgb, var(--role) 55%, #000); }
+.cred-manual { color: var(--muted); }
+.cred-notes ul { margin: 0; padding-left: 1.2rem; }
+.cred-notes li { margin: 6px 0; }
+
 .pw-field { position: relative; display: block; }
 .pw-field input { padding-right: 56px; }
 .pw-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 40px; border: 0; border-radius: 10px; background: var(--primary-soft); cursor: pointer; font-size: 1.1rem; }

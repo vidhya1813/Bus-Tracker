@@ -96,7 +96,7 @@ function CodeInput({ value, onChange }) {
 }
 
 export default function Login({ portal }) {
-  const { user, login } = useAuth();
+  const { user, login, serverConfig } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const isDriver = portal === 'driver';
@@ -242,6 +242,16 @@ export default function Login({ portal }) {
     <div className="page narrow">
       <div className={`card login-card ${isDriver ? 'driver-theme' : ''}`}>
         <Scenery compact />
+        {serverConfig.demoMode && (
+          <Link to="/credentials" className="cred-banner">
+            <span aria-hidden="true">🔑</span>
+            <span>
+              <b>Demo login credentials</b>
+              <small>Just exploring? Use a ready-made Admin, Driver or Passenger account.</small>
+            </span>
+            <span aria-hidden="true">→</span>
+          </Link>
+        )}
         <h1>{title}</h1>
         <p className="muted">
           {isDriver

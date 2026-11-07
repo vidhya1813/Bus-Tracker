@@ -12,6 +12,7 @@ import { query, one } from '../db/index.js';
 import { ah, HttpError, requireAuth, signSession } from '../middleware/auth.js';
 import { sendEmail, sendSms, canDeliver } from '../services/notify.js';
 import { hashPassword, verifyPassword, passwordProblem, DUMMY_HASH } from '../services/passwords.js';
+import { DEMO_PASSWORDS } from '../db/seed.js';
 
 const router = Router();
 const google = config.googleClientId ? new OAuth2Client(config.googleClientId) : null;
@@ -298,6 +299,45 @@ router.post(
     const email = normalise('email', body.email);
     res.json(
       await resolveLogin({ channel: 'email', identifier: email, portal: body.portal, name: body.name, googleSub: `demo-${email}` }),
+    );
+  }),
+);
+
+// Demo mode only: the sample accounts, so testers can log in as each role.
+// These exist only in the in-memory demo database; a real database never has them.
+const DEMO_ROLES = {
+  'admin@govbus.test': {
+    portal: 'passenger',
+    title: 'Admin',
+    lands: '/admin',
+    can: ['Add routes, stops, buses, schedules and fares', 'Register drivers and assign buses', 'See bookings and revenue'],
+  },
+  'driver@govbus.test': {
+    portal: 'driver',
+    title: 'Driver / Conductor',
+    lands: '/driver',
+    can: ["Pick today's trip and share live GPS (or simulate a drive)", 'Scan ticket QR codes or enter a PNR', 'Mark passengers as boarded'],
+  },
+  'passenger@govbus.test': {
+    portal: 'passenger',
+    title: 'Passenger',
+    lands: '/',
+    can: ['Search buses and connecting routes', 'Pick seats, pay (mock) and get a QR e-ticket', 'Track the bus live, cancel and get a refund'],
+  },
+};
+
+router.get(
+  '/demo-accounts',
+  ah(async (req, res) => {
+    if (!config.demoMode) throw new HttpError(404, 'Demo accounts are only available in demo mode');
+    const users = await query(`SELECT name, email, phone, role FROM users WHERE email = ANY($1::text[])`, [Object.keys(DEMO_ROLES)]);
+    res.json(
+      Object.entries(DEMO_ROLES)
+        .map(([email, info]) => {
+          const u = users.find((x) => x.email === email);
+          return u && { ...info, name: u.name, email, phone: u.phone, role: u.role, password: DEMO_PASSWORDS[email] };
+        })
+        .filter(Boolean),
     );
   }),
 );

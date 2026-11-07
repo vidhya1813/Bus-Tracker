@@ -26,6 +26,7 @@ English & தமிழ் · four Tamil Nadu landscape themes · 3D animated UI 
 
 | | Try this in the live demo | What you'll see |
 |---|---|---|
+| 🔑 | [**Login credentials page**](https://govbus-tamilnadu.vercel.app/credentials) | Ready-made Admin, Driver and Passenger accounts. Copy the email and password, or log in with one tap. |
 | 🔍 | [**Chennai → Madurai**](https://govbus-tamilnadu.vercel.app/?from=Chennai&to=Madurai) | Ordinary, Express, AC and Sleeper buses with times, fares and seats left. Filter by time of day, sort by cheapest or fastest. |
 | 🔁 | [**Chennai → Ooty**](https://govbus-tamilnadu.vercel.app/?from=Chennai&to=Ooty) | No direct bus, so GovBus plans the trip with a change at Coimbatore, with the wait time and a book button for each bus. |
 | 🛕 | [**கோவை → Rameswaram**](https://govbus-tamilnadu.vercel.app/?from=%E0%AE%95%E0%AF%8B%E0%AE%B5%E0%AF%88&to=Rameswaram) | Type in Tamil or use nicknames (Kovai, Trichy, Pondy). Typos are forgiven too. |
@@ -67,6 +68,12 @@ Every screen re-colours itself to the landscape you pick. The hero scene is draw
 </table>
 
 ## 📸 Feature tour: click to expand
+
+<details open>
+<summary><b>🔑 Login credentials page</b>: demo Admin, Driver and Passenger accounts</summary>
+<br><img src="docs/screenshots/credentials.jpg" alt="Login credentials page" width="720"><br>
+Every role in one place: copy the email and password, reveal the password with 👁️, or tap <b>Log in as…</b> to go straight to that role's screen.
+</details>
 
 <details>
 <summary><b>💺 Live 3D seat map</b>: sleeper decks, window seats, real-time holds</summary>
@@ -338,7 +345,9 @@ Use **two browser windows** (one normal, one private) to see real-time updates.
 |---|---|---|---|
 | Admin | `/login` | `admin@govbus.test` | `Admin@2026` |
 | Driver | `/driver/login` | `driver@govbus.test` | `Driver@2026` |
-| Passenger | `/login` | create one with **Create an account**, or use a one-time code | your choice |
+| Passenger | `/login` | `passenger@govbus.test` | `Passenger@2026` |
+
+All three are also on the in-app **[Login credentials page](https://govbus-tamilnadu.vercel.app/credentials)** (`/credentials`, the 🔑 *Demo logins* link), which has copy buttons and one-tap "Log in as…". The page and its API (`GET /api/auth/demo-accounts`) only exist in demo mode, so a real database never exposes accounts. You can also create your own account.
 
 The **Password** tab is the default. The **One-time code** tab works for every account, and demo mode shows the code on screen.
 

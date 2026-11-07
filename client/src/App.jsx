@@ -13,6 +13,7 @@ import Track from './pages/Track.jsx';
 import Driver from './pages/Driver.jsx';
 import Admin from './pages/Admin.jsx';
 import Departures from './pages/Departures.jsx';
+import Credentials from './pages/Credentials.jsx';
 
 export default function App() {
   const { pathname } = useLocation();
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/login" element={<Login portal="passenger" />} />
           <Route path="/driver/login" element={<Login portal="driver" />} />
           <Route path="/departures" element={<Departures />} />
+          <Route path="/credentials" element={<Credentials />} />
           <Route path="/trip/:scheduleId/:date" element={<SeatSelect />} />
           <Route path="/track/:scheduleId/:date" element={<Track />} />
           <Route path="/pay/:bookingId" element={<RequireAuth><Payment /></RequireAuth>} />

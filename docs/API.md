@@ -14,6 +14,7 @@ Errors look like `{ "error": "Readable message" }` with a matching HTTP status.
 | POST | `/auth/otp/verify` | – | `{ channel, identifier, code, portal, name? }` | Returns `{ token, user }`. Creates a passenger on first login. |
 | POST | `/auth/google` | – | `{ credential, portal }` | `credential` = Google ID token from Google Identity Services. |
 | POST | `/auth/google/demo` | – | `{ email, portal }` | Local only, when no Google client ID is set. |
+| GET | `/auth/demo-accounts` | – | – | Demo mode only (404 otherwise): the sample Admin / Driver / Passenger accounts with their passwords, used by the `/credentials` page. |
 | GET | `/auth/me` | user | – | Current user. |
 | PATCH | `/auth/me` | user | `{ name }` | Update name, returns a fresh token. |
 

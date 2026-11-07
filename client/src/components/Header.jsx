@@ -52,7 +52,7 @@ function ThemePicker() {
 }
 
 export default function Header() {
-  const { user, logout } = useAuth();
+  const { user, logout, serverConfig } = useAuth();
   const { lang, setLang, large, setLarge, t } = usePrefs();
   const navigate = useNavigate();
   const isStaff = user && (user.role === 'driver' || user.role === 'admin');
@@ -76,6 +76,7 @@ export default function Header() {
           <NavLink to="/" end>{t('nav.home')}</NavLink>
           <NavLink to="/departures">{t('nav.departures')}</NavLink>
           {user && <NavLink to="/bookings">{t('nav.tickets')}</NavLink>}
+          {serverConfig.demoMode && <NavLink to="/credentials">🔑 {t('nav.credentials')}</NavLink>}
           {isStaff && <NavLink to="/driver">{t('nav.driver')}</NavLink>}
           {user?.role === 'admin' && <NavLink to="/admin">{t('nav.admin')}</NavLink>}
         </nav>
