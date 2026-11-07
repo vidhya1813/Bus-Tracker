@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720" width="600" height="720" role="img" aria-label="Route map: no direct bus from Chennai to Ooty, so GovBus suggests changing at Coimbatore">
+  <title>Connecting journeys</title>
+  <style>
+    text { font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .route { fill: none; stroke: #94a8a0; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .75; }
+    .leg1, .leg2 { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 700; stroke-dashoffset: 700; }
+    .leg1 { stroke: #157347; animation: draw1 8s ease-in-out infinite; }
+    .leg2 { stroke: #e8590c; animation: draw2 8s ease-in-out infinite; }
+    .hub { animation: pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .change { animation: show 8s ease-in-out infinite; }
+    .city { fill: #fff; stroke: #0b4f30; stroke-width: 3; }
+    @keyframes draw1 { 0% { stroke-dashoffset: 700; } 35%,90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+    @keyframes draw2 { 0%,45% { stroke-dashoffset: 700; } 70%,90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+    @keyframes show { 0%,34% { opacity: 0; } 38%,92% { opacity: 1; } 100% { opacity: 0; } }
+  </style>
+  <defs>
+    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2f3e9"/>
+      <stop offset="1" stop-color="#cfe8d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="720" rx="24" fill="#d7eef7"/>
+  <!-- rough outline of Tamil Nadu -->
+  <path d="M452 34 L530 40 L528 108 L502 160 L482 202 L480 300 L484 344 L470 382 L420 430 L410 498 L332 522 L282 562 L232 622 L182 668 L150 652 L140 600 L160 522 L152 452 L92 382 L58 322 L40 262 L80 222 L160 200 L222 122 L300 90 L380 52 Z" fill="url(#land)" stroke="#9cc9b1" stroke-width="2"/>
+  <text x="540" y="400" font-size="13" fill="#4a7d95" font-style="italic" transform="rotate(90 540 400)">Bay of Bengal</text>
+
+  <!-- all routes -->
+  <polyline class="route" points="520,58 492,103 450,158 428,193 403,223 349,278 324,329 279,422 255,433"/>
+  <polyline class="route" points="520,58 382,76 263,124 256,172 254,226 198,265 149,293 99,304"/>
+  <polyline class="route" points="255,433 232,382 173,372 106,347 99,304"/>
+  <polyline class="route" points="255,433 230,476 203,580 159,644 175,655"/>
+  <polyline class="route" points="324,329 383,332 448,333 475,334 476,344"/>
+  <polyline class="route" points="520,58 520,112 488,163 470,193"/>
+  <polyline class="route" points="255,433 312,484 344,506 381,517 406,511"/>
+  <polyline class="route" points="99,304 96,270 78,264 65,257"/>
+
+  <!-- the suggested journey -->
+  <polyline class="leg1" points="520,58 382,76 263,124 256,172 254,226 198,265 149,293 99,304"/>
+  <polyline class="leg2" points="99,304 96,270 78,264 65,257"/>
+
+  <!-- towns -->
+  <g font-size="14" font-weight="700" fill="#12261b">
+    <circle class="city" cx="520" cy="58" r="8"/><text x="470" y="40">Chennai</text>
+    <circle class="city" cx="255" cy="433" r="7"/><text x="266" y="446">Madurai</text>
+    <circle class="city" cx="324" cy="329" r="6"/><text x="300" y="316">Trichy</text>
+    <circle class="city" cx="254" cy="226" r="6"/><text x="264" y="230">Salem</text>
+    <circle class="city" cx="175" cy="655" r="6"/><text x="190" y="672">Kanyakumari</text>
+    <circle class="city" cx="406" cy="511" r="6"/><text x="388" y="540">Rameswaram</text>
+    <circle class="city" cx="476" cy="344" r="6"/><text x="430" y="370">Velankanni</text>
+    <circle class="city" cx="470" cy="193" r="6"/><text x="400" y="214">Puducherry</text>
+    <circle class="city" cx="65" cy="257" r="8" fill="#e8590c" stroke="#7f2a07"/><text x="40" y="240" fill="#7f2a07">Ooty</text>
+    <circle class="city hub" cx="99" cy="304" r="9" fill="#f5b301" stroke="#7f2a07"/><text x="110" y="326">Coimbatore</text>
+  </g>
+
+  <!-- moving bus -->
+  <circle r="9" fill="#e8590c" stroke="#fff" stroke-width="3">
+    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.93;0.93;1;1" keyTimes="0;0.35;0.45;0.7;1" calcMode="linear"
+      path="M520,58 L382,76 L263,124 L256,172 L254,226 L198,265 L149,293 L99,304 L96,270 L78,264 L65,257"/>
+  </circle>
+
+  <g class="change">
+    <rect x="120" y="345" width="210" height="60" rx="14" fill="#fff" stroke="#f5b301" stroke-width="3"/>
+    <text x="225" y="370" text-anchor="middle" font-size="15" font-weight="800" fill="#7f2a07">🔁 Change bus at Coimbatore</text>
+    <text x="225" y="392" text-anchor="middle" font-size="13" fill="#55675d">☕ 58 min wait · then Nilgiri ghat road</text>
+  </g>
+
+  <g>
+    <rect x="20" y="24" width="190" height="130" rx="14" fill="#fff" opacity=".95"/>
+    <text x="36" y="52" font-size="15" font-weight="800" fill="#12261b">Chennai → Ooty</text>
+    <text x="36" y="74" font-size="13" fill="#b33">No direct bus</text>
+    <line x1="36" y1="94" x2="68" y2="94" stroke="#157347" stroke-width="6" stroke-linecap="round"/><text x="76" y="99" font-size="13" fill="#12261b">Bus 1 · AC Sleeper</text>
+    <line x1="36" y1="120" x2="68" y2="120" stroke="#e8590c" stroke-width="6" stroke-linecap="round"/><text x="76" y="125" font-size="13" fill="#12261b">Bus 2 · Express</text>
+    <text x="36" y="146" font-size="12" fill="#55675d">13 h 59 m · ₹975 total</text>
+  </g>
+</svg>

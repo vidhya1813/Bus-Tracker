@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="GovBus: a 3D bus driving past Tamil Nadu temple towers at dusk">
+  <title>GovBus — Tamil Nadu Government Bus</title>
+  <style>
+    .drive { animation: drive 14s linear infinite; }
+    .bob { animation: bob .8s ease-in-out infinite; }
+    .wheel { animation: spin .6s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .dash { animation: road .8s linear infinite; }
+    .cloud1 { animation: drift 40s linear infinite; }
+    .cloud2 { animation: drift 60s linear infinite reverse; }
+    .birds { animation: birds 18s linear infinite; }
+    .sun { animation: glow 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .ping { animation: ping 1.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+    .ping2 { animation-delay: .9s; }
+    .lamp { animation: lamp 1s ease-in-out infinite alternate; }
+    .frond { animation: sway 3s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 0% 100%; }
+    .title { animation: rise 1.2s cubic-bezier(.2,.8,.2,1) both; }
+    .sub { animation: rise 1.2s .25s cubic-bezier(.2,.8,.2,1) both; }
+    .chips { animation: rise 1.2s .5s cubic-bezier(.2,.8,.2,1) both; }
+    .live { animation: blink 1.2s ease-in-out infinite; }
+    @keyframes drive { from { transform: translateX(-320px); } to { transform: translateX(1320px); } }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes road { to { stroke-dashoffset: -74; } }
+    @keyframes drift { from { transform: translateX(-200px); } to { transform: translateX(1300px); } }
+    @keyframes birds { from { transform: translate(-80px, 120px); } to { transform: translate(1280px, 40px); } }
+    @keyframes glow { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.12); opacity: 1; } }
+    @keyframes ping { from { transform: scale(.3); opacity: .9; } to { transform: scale(2.4); opacity: 0; } }
+    @keyframes lamp { from { opacity: .55; } to { opacity: 1; } }
+    @keyframes sway { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  </style>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f1d5c"/>
+      <stop offset=".55" stop-color="#e8642c"/>
+      <stop offset="1" stop-color="#ffcf72"/>
+    </linearGradient>
+    <radialGradient id="sunGlow">
+      <stop offset="0" stop-color="#ffd166" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8590c"/>
+      <stop offset="1" stop-color="#a23a07"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b7a8c"/>
+      <stop offset=".35" stop-color="#1b2a35"/>
+      <stop offset="1" stop-color="#0e171e"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+    <g id="gopuram">
+      <rect x="-66" y="-46" width="132" height="46"/>
+      <polygon points="-60,-46 60,-46 53,-70 -53,-70"/>
+      <polygon points="-53,-70 53,-70 46,-93 -46,-93"/>
+      <polygon points="-46,-93 46,-93 39,-115 -39,-115"/>
+      <polygon points="-39,-115 39,-115 32,-136 -32,-136"/>
+      <polygon points="-32,-136 32,-136 25,-156 -25,-156"/>
+      <polygon points="-25,-156 25,-156 18,-175 -18,-175"/>
+      <rect x="-24" y="-197" width="48" height="24" rx="12"/>
+      <ellipse cx="-12" cy="-202" rx="4" ry="5"/><ellipse cx="0" cy="-203" rx="4" ry="5"/><ellipse cx="12" cy="-202" rx="4" ry="5"/>
+      <path d="M-14 0 L-14 -26 Q0 -40 14 -26 L14 0Z" fill="#ffcf72" opacity=".5"/>
+    </g>
+    <g id="palm">
+      <path d="M0 0 C 5 -45 -4 -90 9 -128" stroke="#24120d" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <g class="frond" transform="translate(9 -128)">
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(-165)"/>
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(-125)"/>
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(-85)"/>
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(-45)"/>
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(-5)"/>
+        <path d="M0 0 C 22 -16 50 -12 70 8 C 48 1 24 -1 0 0Z" fill="#24120d" transform="rotate(30)"/>
+      </g>
+    </g>
+  </defs>
+
+  <rect width="1200" height="440" fill="url(#sky)"/>
+  <circle class="sun" cx="900" cy="160" r="150" fill="url(#sunGlow)"/>
+  <circle cx="900" cy="160" r="62" fill="#ffd166"/>
+
+  <g class="cloud1" fill="#ffc0a0" opacity=".9">
+    <ellipse cx="200" cy="90" rx="50" ry="18"/><ellipse cx="232" cy="78" rx="32" ry="20"/><ellipse cx="172" cy="82" rx="26" ry="16"/>
+  </g>
+  <g class="cloud2" fill="#ffd2b8" opacity=".8">
+    <ellipse cx="700" cy="60" rx="40" ry="14"/><ellipse cx="726" cy="50" rx="26" ry="16"/>
+  </g>
+  <g class="birds" fill="none" stroke="#2c1414" stroke-width="2.5" stroke-linecap="round">
+    <path d="M0 0 q7 -7 14 0 q7 -7 14 0"/><path d="M26 10 q7 -7 14 0 q7 -7 14 0"/><path d="M50 2 q6 -6 12 0 q6 -6 12 0"/>
+  </g>
+
+  <path d="M0 300 C 150 215 300 255 430 225 C 570 190 700 255 850 215 C 990 180 1100 235 1200 205 L1200 440 L0 440Z" fill="#93405c"/>
+  <use href="#gopuram" transform="translate(1000 318) scale(1.3)" fill="#3b1323" opacity=".85"/>
+  <use href="#gopuram" transform="translate(1135 325) scale(.75)" fill="#3b1323" opacity=".7"/>
+  <path d="M0 340 C 120 300 260 330 380 312 C 520 288 640 342 780 318 C 920 292 1060 332 1200 302 L1200 440 L0 440Z" fill="#5e2238"/>
+  <use href="#gopuram" transform="translate(640 330) scale(.65)" fill="#3b1323"/>
+  <path d="M0 352 C 200 330 400 344 600 338 C 800 330 1000 348 1200 334 L1200 440 L0 440Z" fill="#3a1222"/>
+  <use href="#palm" transform="translate(60 356) scale(1.05)"/>
+  <use href="#palm" transform="translate(120 358) scale(-.8 .8)"/>
+  <use href="#palm" transform="translate(1150 356)"/>
+
+  <!-- road -->
+  <rect x="0" y="352" width="1200" height="88" fill="#251a1e"/>
+  <rect x="0" y="352" width="1200" height="4" fill="#fff" opacity=".45"/>
+  <line class="dash" x1="-80" y1="398" x2="1280" y2="398" stroke="#ffd43b" stroke-width="5" stroke-dasharray="44 30"/>
+
+  <!-- title -->
+  <g class="title">
+    <rect x="60" y="54" width="300" height="34" rx="17" fill="#f5b301"/>
+    <text x="210" y="77" text-anchor="middle" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#2c1414">TAMIL NADU GOVERNMENT BUS</text>
+    <text x="60" y="170" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="96" font-weight="900" fill="#fff8ec" style="paint-order:stroke" stroke="#3b1323" stroke-opacity=".25" stroke-width="6">GovBus</text>
+  </g>
+  <text class="sub" x="62" y="212" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#ffe6c7">Search · Book · Track every bus, live.</text>
+  <g class="chips" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700">
+    <rect x="60" y="232" width="128" height="30" rx="15" fill="#fff" opacity=".92"/><text x="124" y="252" text-anchor="middle" fill="#7f2a07">React + Vite</text>
+    <rect x="198" y="232" width="150" height="30" rx="15" fill="#fff" opacity=".92"/><text x="273" y="252" text-anchor="middle" fill="#7f2a07">Node + Express</text>
+    <rect x="358" y="232" width="110" height="30" rx="15" fill="#fff" opacity=".92"/><text x="413" y="252" text-anchor="middle" fill="#7f2a07">Supabase</text>
+    <rect x="478" y="232" width="142" height="30" rx="15" fill="#fff" opacity=".92"/><text x="549" y="252" text-anchor="middle" fill="#7f2a07">Leaflet + OSM</text>
+    <circle class="live" cx="640" cy="247" r="7" fill="#40c057"/>
+    <text x="654" y="252" fill="#fff8ec">LIVE GPS</text>
+  </g>
+
+  <!-- the 3D bus -->
+  <g class="drive">
+    <g transform="translate(0 306)">
+      <ellipse cx="125" cy="96" rx="130" ry="10" fill="#000" opacity=".35" filter="url(#soft)"/>
+      <g class="bob">
+        <!-- GPS ping above the bus -->
+        <circle class="ping" cx="125" cy="-30" r="12" fill="none" stroke="#40c057" stroke-width="3"/>
+        <circle class="ping ping2" cx="125" cy="-30" r="12" fill="none" stroke="#40c057" stroke-width="3"/>
+        <path d="M125 -16 c-8 -10 -12 -15 -12 -21 a12 12 0 0 1 24 0 c0 6 -4 11 -12 21z" fill="#e03131"/>
+        <circle cx="125" cy="-37" r="4.5" fill="#fff"/>
+        <!-- roof -->
+        <polygon points="0,0 34,-16 274,-16 240,0" fill="#ffb38a"/>
+        <rect x="100" y="-14" width="70" height="10" rx="3" fill="#eef1f4" transform="skewX(-60) translate(8 0)"/>
+        <!-- side -->
+        <rect x="0" y="0" width="240" height="84" rx="8" fill="url(#side)"/>
+        <rect x="12" y="12" width="176" height="30" rx="4" fill="url(#glass)"/>
+        <g stroke="#c2410c" stroke-width="5"><line x1="56" y1="12" x2="56" y2="42"/><line x1="100" y1="12" x2="100" y2="42"/><line x1="144" y1="12" x2="144" y2="42"/></g>
+        <rect x="200" y="12" width="26" height="58" rx="3" fill="#0f1a21" stroke="#7f2a07" stroke-width="2"/>
+        <rect x="0" y="54" width="240" height="8" fill="#f5b301"/>
+        <text x="16" y="50" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="800" fill="#fff" letter-spacing="1">GOVBUS · அரசுப் பேருந்து</text>
+        <!-- front -->
+        <polygon points="240,0 274,-16 274,66 240,84" fill="#a23a07"/>
+        <polygon points="244,8 270,-4 270,30 244,42" fill="url(#glass)"/>
+        <polygon points="246,-1 270,-12 270,-6 246,5" fill="#111"/>
+        <text x="250" y="2" font-family="Consolas, monospace" font-size="6" fill="#ffb000" transform="skewY(-25) translate(0 112)">OOTY</text>
+        <circle class="lamp" cx="250" cy="60" r="5" fill="#fffbe0"/>
+        <circle class="lamp" cx="266" cy="52" r="5" fill="#fffbe0"/>
+        <!-- wheels -->
+        <g transform="translate(52 84)"><circle r="19" fill="#1b1b1b"/><g class="wheel"><circle r="9" fill="#d7d9db"/><path d="M0 -9 V9 M-9 0 H9" stroke="#777" stroke-width="3"/></g></g>
+        <g transform="translate(184 84)"><circle r="19" fill="#1b1b1b"/><g class="wheel"><circle r="9" fill="#d7d9db"/><path d="M0 -9 V9 M-9 0 H9" stroke="#777" stroke-width="3"/></g></g>
+      </g>
+    </g>
+  </g>
+</svg>
