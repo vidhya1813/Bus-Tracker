@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import SOS from './components/SOS.jsx';
-import { RequireAuth } from './auth.jsx';
+import { RequireAuth, useAuth } from './auth.jsx';
 import Login from './pages/Login.jsx';
 import Search from './pages/Search.jsx';
 import SeatSelect from './pages/SeatSelect.jsx';
@@ -15,33 +15,42 @@ import Admin from './pages/Admin.jsx';
 import Departures from './pages/Departures.jsx';
 import Credentials from './pages/Credentials.jsx';
 
+// Every page of the app needs a login. Visitors who aren't signed in land on the
+// full-screen login page first, then go back to the page they asked for.
+const AUTH_PAGES = ['/login', '/driver/login'];
+
 export default function App() {
   const { pathname } = useLocation();
+  const { user } = useAuth();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  // Login pages (and the credentials page before login) are standalone: no app header or SOS bar.
+  const standalone = AUTH_PAGES.includes(pathname) || (pathname === '/credentials' && !user);
+  const guard = (el, roles) => <RequireAuth roles={roles}>{el}</RequireAuth>;
+
   return (
     <>
-      <Header />
-      <main key={pathname} className="route-fade">
+      {!standalone && <Header />}
+      <main key={pathname} className={`route-fade ${standalone ? 'standalone' : ''}`}>
         <Routes>
-          <Route path="/" element={<Search />} />
           <Route path="/login" element={<Login portal="passenger" />} />
           <Route path="/driver/login" element={<Login portal="driver" />} />
-          <Route path="/departures" element={<Departures />} />
           <Route path="/credentials" element={<Credentials />} />
-          <Route path="/trip/:scheduleId/:date" element={<SeatSelect />} />
-          <Route path="/track/:scheduleId/:date" element={<Track />} />
-          <Route path="/pay/:bookingId" element={<RequireAuth><Payment /></RequireAuth>} />
-          <Route path="/ticket/:bookingId" element={<RequireAuth><Ticket /></RequireAuth>} />
-          <Route path="/bookings" element={<RequireAuth><MyBookings /></RequireAuth>} />
-          <Route path="/driver" element={<RequireAuth roles={['driver', 'admin']}><Driver /></RequireAuth>} />
-          <Route path="/admin" element={<RequireAuth roles={['admin']}><Admin /></RequireAuth>} />
+          <Route path="/" element={guard(<Search />)} />
+          <Route path="/departures" element={guard(<Departures />)} />
+          <Route path="/trip/:scheduleId/:date" element={guard(<SeatSelect />)} />
+          <Route path="/track/:scheduleId/:date" element={guard(<Track />)} />
+          <Route path="/pay/:bookingId" element={guard(<Payment />)} />
+          <Route path="/ticket/:bookingId" element={guard(<Ticket />)} />
+          <Route path="/bookings" element={guard(<MyBookings />)} />
+          <Route path="/driver" element={guard(<Driver />, ['driver', 'admin'])} />
+          <Route path="/admin" element={guard(<Admin />, ['admin'])} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <SOS />
+      {!standalone && <SOS />}
     </>
   );
 }

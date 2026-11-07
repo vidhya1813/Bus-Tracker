@@ -548,6 +548,45 @@ legend { font-weight: 700; padding: 0 6px; }
 .google-slot { display: flex; justify-content: center; min-height: 44px; }
 .google-demo { display: flex; flex-direction: column; gap: 8px; }
 .switch-portal { text-align: center; margin-top: 16px; }
+/* ---------- Standalone login page (the site's front door) ---------- */
+main.standalone { min-height: 100vh; overflow-x: clip; }
+.auth-page { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100vh; overflow-x: clip; }
+.auth-panel, .quick-role, .quick-roles { min-width: 0; }
+.quick-roles > * { min-width: 0; }
+.auth-visual { overflow: hidden; min-width: 0; }
+.auth-visual .scenery { height: 340px; }
+.auth-copy { position: absolute; top: 22px; left: 18px; right: 18px; pointer-events: auto; animation: rise 0.8s ease both; }
+.auth-copy .hero-title { font-size: clamp(1.8rem, 4vw, 3.2rem); margin: 10px 0 6px; }
+.auth-points { display: none; list-style: none; padding: 0; margin: 14px 0 0; }
+.auth-points li { margin: 8px 0; font-weight: 700; color: var(--hero-ink); background: color-mix(in srgb, #fff 55%, transparent); backdrop-filter: blur(6px); width: fit-content; padding: 6px 14px; border-radius: 999px; }
+.auth-panel { display: flex; flex-direction: column; gap: 14px; padding: 16px; max-width: 560px; width: 100%; margin: -40px auto 0; position: relative; z-index: 3; }
+.auth-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 18px; background: color-mix(in srgb, var(--primary-dark) 90%, transparent); color: #fff; box-shadow: var(--shadow); }
+.auth-brand { font-size: 1.2rem; }
+.auth-tools { display: flex; gap: 6px; align-items: center; }
+.auth-panel .login-card { margin: 0; box-shadow: var(--shadow-lg); animation: rise 0.7s 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.quick-login { margin: 0; animation: rise 0.7s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; border: 2px dashed color-mix(in srgb, var(--accent) 70%, #fff); }
+.quick-roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.quick-role {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px; border-radius: 16px; cursor: pointer; font: inherit;
+  border: 2px solid var(--line); background: #fff; color: var(--ink); transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+.quick-role:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.quick-role .mono { font-size: 0.66rem; color: var(--muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quick-role-icon { font-size: 1.8rem; }
+.quick-role.r-admin:hover { border-color: #7048e8; }
+.quick-role.r-driver:hover { border-color: #e8590c; }
+.quick-role.r-passenger:hover { border-color: #157347; }
+.back-login { display: inline-block; margin-bottom: 12px; font-weight: 700; }
+@media (min-width: 900px) {
+  .auth-page { grid-template-columns: minmax(0, 1.15fr) minmax(420px, 0.85fr); }
+  .auth-visual { position: sticky; top: 0; height: 100vh; }
+  .auth-visual .scenery { height: 100vh; }
+  .auth-visual .bus-stage { left: 58%; }
+  .auth-copy { top: 48px; left: 48px; right: 48px; }
+  .auth-points { display: block; }
+  .auth-panel { margin: 0; padding: 28px 32px; justify-content: center; max-width: none; }
+}
+
 /* ---------- Login credentials page ---------- */
 .cred-banner {
   display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin: 0 0 14px; border-radius: 16px; text-decoration: none; color: var(--ink);

@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth.jsx';
 import { THEMES, usePrefs } from '../prefs.jsx';
 
-function ThemePicker() {
+export function ThemePicker() {
   const { theme, setTheme, t } = usePrefs();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -58,7 +58,7 @@ export default function Header() {
   const isStaff = user && (user.role === 'driver' || user.role === 'admin');
   const doLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   return (

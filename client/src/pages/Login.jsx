@@ -1,11 +1,14 @@
 // Login / sign up for two portals: passengers (/login) and drivers/conductors (/driver/login).
 // Methods: email-or-mobile + password (with OTP-verified sign up and forgot password), one-time code, or Google.
-import { useCallback, useState } from 'react';
+// This is the site's front door: every other page redirects here until you are logged in.
+import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api.js';
 import { useAuth } from '../auth.jsx';
+import { usePrefs } from '../prefs.jsx';
 import GoogleButton from '../components/GoogleButton.jsx';
 import Scenery from '../components/Scenery.jsx';
+import { ThemePicker } from '../components/Header.jsx';
 
 const channelOf = (v) => (v.includes('@') ? 'email' : 'phone');
 
@@ -97,6 +100,7 @@ function CodeInput({ value, onChange }) {
 
 export default function Login({ portal }) {
   const { user, login, serverConfig } = useAuth();
+  const { t, lang, setLang } = usePrefs();
   const navigate = useNavigate();
   const location = useLocation();
   const isDriver = portal === 'driver';
@@ -128,6 +132,15 @@ export default function Login({ portal }) {
     [login, navigate, isDriver, after],
   );
   const onGoogleError = useCallback((m) => setError(m), []);
+  // Demo one-tap login: go back to the page they asked for, or to that role's home screen.
+  const quickDone = useCallback(
+    (session, lands) => {
+      setDone(true);
+      login(session);
+      navigate(location.state?.from || lands, { replace: true });
+    },
+    [login, navigate, location.state],
+  );
 
   if (user && !done) return <Navigate to={after} replace />;
 
@@ -239,19 +252,40 @@ export default function Login({ portal }) {
   );
 
   return (
-    <div className="page narrow">
+    <div className="auth-page">
+      {/* Left / top: the animated Tamil Nadu scene with the 3D bus */}
+      <section className="auth-visual" aria-label="GovBus">
+        <Scenery busLabel={isDriver ? 'ON DUTY' : 'GOVBUS'}>
+          <div className="auth-copy">
+            <span className="kicker">{t('hero.kicker')}</span>
+            <h2 className="hero-title">{t('auth.welcome')}</h2>
+            <p className="hero-sub">{isDriver ? t('auth.driverSub') : t('auth.sub')}</p>
+            <ul className="auth-points">
+              <li>🔍 {t('auth.p1')}</li>
+              <li>💺 {t('auth.p2')}</li>
+              <li>📍 {t('auth.p3')}</li>
+            </ul>
+          </div>
+        </Scenery>
+      </section>
+
+      {/* Right / bottom: the login form */}
+      <section className="auth-panel">
+        <div className="auth-top">
+          <span className="brand auth-brand">
+            <span className="brand-badge" aria-hidden="true"><span>GB</span></span>
+            <span className="brand-text">GovBus<small>{isDriver ? 'Driver / Conductor portal' : 'Passenger portal'}</small></span>
+          </span>
+          <div className="auth-tools">
+            <button type="button" className="lang-btn" onClick={() => setLang(lang === 'en' ? 'ta' : 'en')} aria-label="Change language / மொழியை மாற்று">
+              <span className={lang === 'en' ? 'on' : ''}>EN</span>
+              <span className={lang === 'ta' ? 'on' : ''}>தமிழ்</span>
+            </button>
+            <ThemePicker />
+          </div>
+        </div>
+
       <div className={`card login-card ${isDriver ? 'driver-theme' : ''}`}>
-        <Scenery compact />
-        {serverConfig.demoMode && (
-          <Link to="/credentials" className="cred-banner">
-            <span aria-hidden="true">🔑</span>
-            <span>
-              <b>Demo login credentials</b>
-              <small>Just exploring? Use a ready-made Admin, Driver or Passenger account.</small>
-            </span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        )}
         <h1>{title}</h1>
         <p className="muted">
           {isDriver
@@ -400,12 +434,63 @@ export default function Login({ portal }) {
 
         <p className="switch-portal">
           {isDriver ? (
-            <>Passenger? <Link to="/login">Passenger login</Link></>
+            <>Passenger? <Link to="/login" state={location.state}>Passenger login</Link></>
           ) : (
-            <>Bus crew? <Link to="/driver/login">Driver / Conductor login</Link></>
+            <>Bus crew? <Link to="/driver/login" state={location.state}>Driver / Conductor login</Link></>
           )}
         </p>
       </div>
+
+        {serverConfig.demoMode && <DemoQuickLogin onDone={quickDone} />}
+      </section>
+    </div>
+  );
+}
+
+// One-tap login with the demo accounts (demo mode only).
+const ROLE_ICON = { admin: '🛠️', driver: '🧑‍✈️', passenger: '🧳' };
+function DemoQuickLogin({ onDone }) {
+  const { t } = usePrefs();
+  const [accounts, setAccounts] = useState([]);
+  const [busy, setBusy] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    api('/auth/demo-accounts').then(setAccounts).catch(() => setAccounts([]));
+  }, []);
+  if (!accounts.length) return null;
+
+  const go = async (a) => {
+    setBusy(a.email);
+    setError('');
+    try {
+      const session = await api('/auth/password/login', { method: 'POST', body: { identifier: a.email, password: a.password, portal: a.portal } });
+      onDone(session, a.lands);
+    } catch (e) {
+      setError(e.message);
+      setBusy('');
+    }
+  };
+
+  return (
+    <div className="card quick-login">
+      <div className="row-between">
+        <div>
+          <b>⚡ {t('auth.quick')}</b>
+          <div className="muted small">{t('auth.quickSub')}</div>
+        </div>
+        <Link to="/credentials" className="small">{t('auth.allCreds')} →</Link>
+      </div>
+      <div className="quick-roles">
+        {accounts.map((a) => (
+          <button key={a.email} type="button" className={`quick-role r-${a.role}`} onClick={() => go(a)} disabled={!!busy}>
+            <span className="quick-role-icon" aria-hidden="true">{ROLE_ICON[a.role]}</span>
+            <b>{busy === a.email ? '…' : a.title.split(' /')[0]}</b>
+            <span className="small mono">{a.email}</span>
+          </button>
+        ))}
+      </div>
+      {error && <div className="error-card">{error}</div>}
     </div>
   );
 }

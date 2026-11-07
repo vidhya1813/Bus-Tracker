@@ -71,6 +71,9 @@ export default function Credentials() {
 
   return (
     <div className="page">
+      {!user && (
+        <Link to="/login" className="back-login">← Back to login</Link>
+      )}
       <div className="cred-hero rise">
         <span className="cred-hero-icon" aria-hidden="true">🔑</span>
         <div>

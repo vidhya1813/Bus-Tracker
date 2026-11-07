@@ -24,6 +24,8 @@ English & தமிழ் · four Tamil Nadu landscape themes · 3D animated UI 
 
 ## 🎮 Try it live: click any row
 
+> 🔐 **The site opens on its login page.** Every screen needs a login. Tap a **Quick demo login** button (Admin, Driver or Passenger), use the [credentials page](https://govbus-tamilnadu.vercel.app/credentials), or create your own account. After you log in, you land on the link you clicked.
+
 | | Try this in the live demo | What you'll see |
 |---|---|---|
 | 🔑 | [**Login credentials page**](https://govbus-tamilnadu.vercel.app/credentials) | Ready-made Admin, Driver and Passenger accounts. Copy the email and password, or log in with one tap. |
